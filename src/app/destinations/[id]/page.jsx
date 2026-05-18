@@ -1,8 +1,10 @@
+import EditModal from '@/components/EditModal';
+import { Button } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiLocationOn } from 'react-icons/ci';
-import { FaArrowLeft, FaRegCalendarAlt } from 'react-icons/fa';
+import { FaArrowLeft, FaEdit, FaRegCalendarAlt } from 'react-icons/fa';
 
 const DestinationDetailsPage = async ({ params }) => {
     const { id } = await params;
@@ -11,7 +13,10 @@ const DestinationDetailsPage = async ({ params }) => {
     const d = await res.json();
     return (
         <div className='border p-4 space-y-4 w-300 mx-auto'>
-            <Link href='/destinations' className='text-blue-500 flex items-center gap-1'><FaArrowLeft /> Back to all destinations</Link>
+            <div className='flex justify-between items-center'>
+                <Link href='/destinations' className='text-blue-500 flex items-center gap-1'><FaArrowLeft /> Back to all destinations</Link>
+                <EditModal destination={d}/>
+            </div>
             <h1 className='text-2xl'><span className='font-bold'>{d.destinationName}</span> Details</h1>
             <div className='space-y-8'>
                 <div className='relative overflow-hidden w-full h-150 mx-auto'>
