@@ -4,13 +4,13 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div className='flex items-center justify-between bg-white p-4 shadow-md'>
+        <div className='flex items-center justify-between bg-white p-4 shadow-md mb-10'>
             <ul className='flex items-center gap-4'>
                 <li>
                     <Link href={'/'}>Home</Link>
                 </li>
                 <li>
-                    <Link href={'/destination'}>Destination</Link>
+                    <Link href={'/add-destination'}>Add Destination</Link>
                 </li>
                 <li>
                     <Link href={'/my-bookings'}>My Bookings</Link>
