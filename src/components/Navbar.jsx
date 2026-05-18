@@ -1,8 +1,13 @@
+'use client'
+import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import NavTopUser from './NavTopUser';
 
 const Navbar = () => {
+    const { data, isPending } = authClient.useSession();
+    const { user } = data || {};
+
     return (
         <div className='flex items-center justify-between bg-white p-4 shadow-md mb-10'>
             <ul className='flex items-center gap-4'>
@@ -24,6 +29,7 @@ const Navbar = () => {
                 <Image src={'/assets/Wanderlast.png'} width={100} height={100} alt='wanderlust logo'></Image>
             </div>
 
+            {isPending ? <p>Loading...</p> : user ? <NavTopUser user={user} /> : 
             <ul className='flex items-center gap-4'>
                 <li>
                     <Link href={'/profile'}>Profile</Link>
@@ -34,7 +40,7 @@ const Navbar = () => {
                 <li>
                     <Link href={'/signup'}>Signup</Link>
                 </li>
-            </ul>
+            </ul>}
         </div>
     );
 };

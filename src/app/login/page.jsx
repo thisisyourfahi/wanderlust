@@ -1,57 +1,44 @@
 'use client'
-import { authClient } from '@/lib/auth-client';
+import React from 'react';
 import { Card } from '@heroui/react';
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { authClient } from '@/lib/auth-client';
 import { redirect } from 'next/navigation';
-import React from 'react';
-
-const SignUpPage = () => {
+import { FcGoogle } from "react-icons/fc";
+const LoginPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const userData = Object.fromEntries(formData.entries());
+        const { email, password } = userData;
 
-        const { name, image, email, password } = userData;
-
-        const { data, isPending } = await authClient.signUp.email({
-            name,
-            image,
+        const { data, error } = await authClient.signIn.email({
             email,
             password
-        })
-
-        if (data) {
-            alert("Account created successfully! Please check your email to verify your account.");
-            redirect('/login');
+        });
+        if (error) {
+            alert(error.message);
+        } else {
+            alert("Logged in successfully!");
+            redirect('/');
         }
+    }
+
+    const handleGoogleSignIn = async () => {
+        const res = await authClient.signIn.social({
+            provider: 'google',
+        });
     }
     return (
         <div className='space-y-8'>
             <div className='text-center'>
-                <h2 className='text-2xl font-bold'>Create Account</h2>
-                <p>Create a new account to get started.</p>
+                <h2 className='text-2xl font-bold'>Login to your Account</h2>
             </div>
 
             <div className='max-w-150 mx-auto'>
                 <Card className='rounded-none border'>
                     <Form className="flex max:w-5xl flex-col gap-4" onSubmit={onSubmit}>
-                        <TextField
-                            isRequired
-                            name="name"
-                            type="text"
-                        >
-                            <Label>Name</Label>
-                            <Input className={'rounded-none'} placeholder="John Doe" />
-                            <FieldError />
-                        </TextField>
-                        <TextField
-                            name="image"
-                            type="text"
-                        >
-                            <Label>Image</Label>
-                            <Input className={'rounded-none'} placeholder="Image URL" />
-                            <FieldError />
-                        </TextField>
+
                         <TextField
                             isRequired
                             name="email"
@@ -92,7 +79,7 @@ const SignUpPage = () => {
                         </TextField>
                         <div className="flex gap-2 justify-center">
                             <Button className={'rounded-none'} type="submit">
-                                Create Account
+                                Login
 
                             </Button>
                             <Button className={'rounded-none'} type="reset" variant="secondary">
@@ -102,16 +89,18 @@ const SignUpPage = () => {
                     </Form>
                 </Card>
 
-                <div className='text-center mt-2'>
-                    <p>If you want to sign in with Google, just go to the login page and click the Google sign-in button.</p>
-                    <p>If you already have an account, <a href='/login' className='text-blue-500'>login here</a>.</p>
+                <div className='flex flex-col items-center mt-2'>
+                    <p>Don&apos;t have an account? <a href='/signup' className='text-blue-500'>Sign Up</a></p>
+                    <p>Or</p>
+                    <Button onClick={handleGoogleSignIn} variant="tertiary" className={'rounded-none w-full'}>
+                        <FcGoogle />
+                        Sign in with Google
+                    </Button>
                 </div>
-
-
             </div>
 
         </div>
     );
 };
 
-export default SignUpPage;
+export default LoginPage;
