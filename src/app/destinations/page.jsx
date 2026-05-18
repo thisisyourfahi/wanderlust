@@ -1,5 +1,5 @@
 import React from 'react';
-import DestinationCard from './DestinationCard';
+import DestinationCard from '../../components/DestinationCard';
 
 const DestinationPage = async () => {
     const res = await fetch('http://localhost:5000/destinations');
@@ -8,7 +8,7 @@ const DestinationPage = async () => {
 
     return (
         <div className='space-y-4'>
-            <h1 className='text-2xl font-bold'>All Destinations</h1>
+            <h1 className='text-2xl font-bold'>{data.length} Destinations</h1>
             
             <div className='grid grid-cols-3 gap-10'>
                 {data.map(d => <DestinationCard key={d._id} d={d} />)}

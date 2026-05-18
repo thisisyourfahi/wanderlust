@@ -1,5 +1,6 @@
 'use client';
 import { FieldError, Input, Label, TextField, Select, ListBox, TextArea, Button, Card } from "@heroui/react";
+import { redirect } from "next/navigation";
 const AddDestinationPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ const AddDestinationPage = () => {
         const result = await res.json();
         if (result.acknowledged) {
             alert('Destination added successfully!');
-            e.target.reset();
+            redirect('/destinations');
         }
     }
 
