@@ -26,7 +26,7 @@ const AddDestinationPage = () => {
     return (
         <div className="space-y-4">
             <h2 className="text-2xl font-bold">Add Destination</h2>
-            <Card className="max-w-7xl mx-auto border">
+            <Card className="max-w-7xl mx-auto border rounded-none">
                 <form onSubmit={onSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Destination Name */}

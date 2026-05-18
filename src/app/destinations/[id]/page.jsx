@@ -1,3 +1,4 @@
+import BookingCard from '@/components/BookingCard';
 import DeleteModal from '@/components/DeleteModal';
 import EditModal from '@/components/EditModal';
 import { Button } from '@heroui/react';
@@ -26,15 +27,20 @@ const DestinationDetailsPage = async ({ params }) => {
                 <div className='relative overflow-hidden w-full h-150 mx-auto'>
                     <Image src={d.imageUrl} alt={d.destinationName} fill className='object-cover object-center' />
                 </div>
-                <div className='space-y-2'>
-                    <p className='flex items-center gap-1'><CiLocationOn />{d.country}</p>
-                    <p className='text-2xl font-bold'>{d.destinationName}</p>
-                    <p className='flex items-center gap-1'><FaRegCalendarAlt />{d.duration}</p>
-                </div>
+                <div className='flex items-center justify-between'>
+                    <div className='space-y-8'>
+                        <div className='space-y-2'>
+                            <p className='flex items-center gap-1'><CiLocationOn />{d.country}</p>
+                            <p className='text-2xl font-bold'>{d.destinationName}</p>
+                            <p className='flex items-center gap-1'><FaRegCalendarAlt />{d.duration}</p>
+                        </div>
 
-                <div className='space-y-2'>
-                    <p className='text-2xl font-bold'>Overview</p>
-                    <p>{d.description}</p>
+                        <div className='space-y-2'>
+                            <p className='text-2xl font-bold'>Overview</p>
+                            <p>{d.description}</p>
+                        </div>
+                    </div>
+                    <BookingCard d={d} />
                 </div>
             </div>
         </div>
