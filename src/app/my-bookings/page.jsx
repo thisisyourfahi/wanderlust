@@ -11,7 +11,9 @@ const MyBookingPage = async () => {
     })
     const userId = session?.user?.id;
     const res = await fetch(`http://localhost:5000/my-bookings/${userId}`)
-    const data = await res.json();
+    const bookings = await res.json();
+
+    console.log('users bookings:', bookings)
 
     return (
         <div className='space-y-8'>
@@ -22,12 +24,12 @@ const MyBookingPage = async () => {
 
             <div className='space-y-8'>
                 {
-                    data.length > 0 ? <>
+                    bookings.length > 0 ? <>
                         {
-                            data.map(d => <BookedCards key={d._id} bookingInfo={d}/>)
+                            bookings.map(booking => <BookedCards key={booking._id} bookingInfo={booking}/>)
                         }
                     </> : <>
-                        <h2>You don&apos;t have any booking at this moment.</h2>
+                        <h2 className='text-center pt-60 pb-60 border'>You don&apos;t have any booking at this moment.</h2>
                     </>
                 }
             </div>

@@ -3,12 +3,12 @@ import { AlertDialog, Button, Chip } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaCheck, FaClock, FaEye, FaRegCalendarAlt, FaTrash } from "react-icons/fa";
+import DeleteBookingModal from "./DeleteBookingModal";
 
 const BookedCards = async ({ bookingInfo }) => {
     const destId = bookingInfo.destinationID;
     const res = await fetch(`http://localhost:5000/destinations/${destId}`);
     const d = await res.json();
-    console.log(d);
     return (
         <div className='p-4 border flex justify-between'>
             <div className="flex  items-center gap-4">
@@ -34,7 +34,7 @@ const BookedCards = async ({ bookingInfo }) => {
                         <FaEye /> View
                     </Button>
                 </Link>
-                <DeleteModal destination={d} deleteBooking={true}/>
+                <DeleteBookingModal deleteBookingId={bookingInfo._id}/>
             </div>
         </div>
     );
