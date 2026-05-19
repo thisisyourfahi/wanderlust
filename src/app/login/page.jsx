@@ -29,6 +29,7 @@ const LoginPage = () => {
             provider: 'google',
         });
     }
+    
     return (
         <div className='space-y-8'>
             <div className='text-center'>

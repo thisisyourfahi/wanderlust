@@ -11,13 +11,11 @@ const BookingCard = ({ d }) => {
     const user = data?.user;
 
     const handleBooking = async () => {
-        console.log(data);
         const bookingData = {
             userID: user?.id,
             destinationID: _id,
             date: new Date()
         }
-        console.log('Booking Data:', bookingData);
 
         const { data: response, error } = await fetch(`http://localhost:5000/destinations/${_id}/book`, {
             method: 'POST',

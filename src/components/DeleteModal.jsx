@@ -3,9 +3,12 @@ import {AlertDialog, Button} from "@heroui/react";
 import { redirect } from "next/navigation";
 import { FaTrash } from "react-icons/fa";
 
-const DeleteModal = ({ destination }) => {
+const DeleteModal = ({ destination, deleteBooking }) => {
 
     const handleDelete = async () => {
+        if (deleteBooking) {
+            // hit delete booking url 
+        }
         const res = await fetch(`http://localhost:5000/destinations/${destination._id}`, {
             method: 'DELETE'
         });
@@ -19,7 +22,7 @@ const DeleteModal = ({ destination }) => {
 
     return (
         <AlertDialog>
-            <Button variant="danger" className={'rounded-none'}><FaTrash />Delete</Button>
+            <Button size="sm" variant="danger" className={'rounded-none'}><FaTrash />Delete</Button>
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-100 rounded-none">
