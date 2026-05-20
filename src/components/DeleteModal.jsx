@@ -6,24 +6,6 @@ import { FaTrash } from "react-icons/fa";
 const DeleteModal = ({ destination, deleteBooking, bookingInfo }) => {
 
     const handleDelete = async () => {
-        // if (deleteBooking) {
-        //     // hit delete booking url 
-        //     console.log('delete booking:', bookingInfo)
-        //     const res = await fetch(`http://localhost:5000/my-bookings/delete/${bookingInfo._id}`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(bookingInfo)
-        //     })
-        //     const result = await res.json();
-        //     if (result) {
-        //         alert('Booking Cancelled');
-        //         redirect('/my-bookings')
-        //     }
-        //     console.log('delete booking respons from server:', result);
-        //     return ;
-        // }
 
         const res = await fetch(`http://localhost:5000/destinations/${destination._id}`, {
             method: 'DELETE'

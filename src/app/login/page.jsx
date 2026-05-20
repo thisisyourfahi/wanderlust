@@ -1,11 +1,22 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Card } from '@heroui/react';
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from '@/lib/auth-client';
-import { redirect } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import { FcGoogle } from "react-icons/fc";
 const LoginPage = () => {
+    // showing alert if redirected
+    const searchParams = useSearchParams();
+    const wasRedirected = searchParams.get('redirected');
+    const hasShown = useRef(false);
+    useEffect(() => {
+        if (wasRedirected && !hasShown.current) {
+            alert('You need to log in to access that page.')
+            hasShown.current = true;
+        }
+    }, [wasRedirected])
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
